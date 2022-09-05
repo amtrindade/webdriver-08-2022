@@ -2,6 +2,8 @@ package com.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,13 +33,39 @@ public class WebElementsTest {
 	@Test
 	public void testValidateNameTextField() {
 		//mapeia o elemento
-		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
+		WebElement tfName = driver.findElement(By.cssSelector("*[name='txtbox1']"));
 		
 		//faz a interação com o elemento
-		textFieldName.sendKeys("Antonio Trindade");
+		tfName.sendKeys("Antonio Trindade");
 		
 		//valida o resultado
-		assertEquals("Antonio Trindade", textFieldName.getAttribute("value"));		
+		assertEquals("Antonio Trindade", tfName.getAttribute("value"));		
+	}
+	
+	@Test
+	public void testValidadeEnableTextFields() {
+		
+		WebElement tfBox1 = driver.findElement(By.name("txtbox1"));
+		WebElement tfBox2 = driver.findElement(By.name("txtbox2"));
+		
+		assertFalse(tfBox2.isEnabled());
+		assertTrue(tfBox1.isEnabled());
+
+	}
+	
+	@Test
+	public void testValidateRadioGroup1() throws InterruptedException {
+		
+		List<WebElement> listRadio = driver.findElements(By.name("radioGroup1"));
+		listRadio.get(2).click();
+		
+		Thread.sleep(5000);
+		
+		assertFalse(listRadio.get(0).isSelected());
+		assertFalse(listRadio.get(1).isSelected());
+		assertTrue(listRadio.get(2).isSelected());
+		assertFalse(listRadio.get(3).isSelected());
+		
 	}
 	
 }
