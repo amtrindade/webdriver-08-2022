@@ -117,6 +117,8 @@ public class WebElementsTest {
 		selMulti.selectByVisibleText("Item 8");
 		selMulti.selectByVisibleText("Item 9");
 		
+		Thread.sleep(3000);
+		
 		List<WebElement> listOptions = selMulti.getAllSelectedOptions();
 		assertEquals(3, listOptions.size());
 		
@@ -125,12 +127,35 @@ public class WebElementsTest {
 		assertEquals("Item 9", listOptions.get(2).getText());
 		
 		selMulti.deselectByVisibleText("Item 8");
+		Thread.sleep(3000);
+		
 		listOptions = selMulti.getAllSelectedOptions();
 		assertEquals(2, listOptions.size());
 		
 		assertEquals("Item 5", listOptions.get(0).getText());		
 		assertEquals("Item 9", listOptions.get(1).getText());
 				
+	}
+	
+	@Test
+	public void testValidadeIframe() throws InterruptedException {
+		
+		//entra no iframe
+		driver.switchTo().frame("frame1");
+		
+		//mapeia o elemento
+		WebElement tfiFrame = driver.findElement(By.id("tfiframe"));
+		
+		// realiza a ação com o elemento
+		tfiFrame.sendKeys("Teste do iframe");
+		Thread.sleep(5000);
+		
+		//valida se o texto inserido é o texto que está no componente
+		assertEquals("Teste do iframe", tfiFrame.getAttribute("value"));
+		
+		//retorna o driver para página principal
+		driver.switchTo().defaultContent();
+		
 	}
 	
 }
