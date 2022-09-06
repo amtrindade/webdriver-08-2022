@@ -57,15 +57,38 @@ public class WebElementsTest {
 	public void testValidateRadioGroup1() throws InterruptedException {
 		
 		List<WebElement> listRadio = driver.findElements(By.name("radioGroup1"));
+
+		listRadio.get(0).click();
+		Thread.sleep(3000);
+		
 		listRadio.get(2).click();
 		
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		
 		assertFalse(listRadio.get(0).isSelected());
 		assertFalse(listRadio.get(1).isSelected());
 		assertTrue(listRadio.get(2).isSelected());
 		assertFalse(listRadio.get(3).isSelected());
 		
+	}
+	
+	@Test
+	public void testValidateCheckBox() throws InterruptedException {
+		List<WebElement> listCheck = driver.findElements(By.name("chkbox"));
+		
+		for (WebElement el : listCheck) {
+			System.out.println(el.getAttribute("value"));
+
+			if ((el.getAttribute("value").equals("Check 3"))
+					|| (el.getAttribute("value").equals("Check 4"))){
+				el.click();
+			}					
+		}
+
+		assertFalse(listCheck.get(0).isSelected());
+		assertFalse(listCheck.get(1).isSelected());
+		assertTrue(listCheck.get(2).isSelected());
+		assertTrue(listCheck.get(3).isSelected());
 	}
 	
 }
