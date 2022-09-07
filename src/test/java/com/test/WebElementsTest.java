@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -156,6 +157,23 @@ public class WebElementsTest {
 		//retorna o driver para página principal
 		driver.switchTo().defaultContent();
 		
+	}
+	
+	@Test
+	public void testAlert() throws InterruptedException {
+		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		btnAlert.click();
+		
+		//captura o alert que está na tela
+		Alert alert = driver.switchTo().alert();
+		
+		//valida o texto do alert
+		assertEquals("Eu sou um alerta!", alert.getText());
+		
+		Thread.sleep(3000);
+		
+		//clica no ok do alert
+		alert.accept();		
 	}
 	
 }
