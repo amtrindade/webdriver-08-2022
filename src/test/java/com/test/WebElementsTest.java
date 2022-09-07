@@ -174,6 +174,5 @@ public class WebElementsTest {
 		
 		//clica no ok do alert
 		alert.accept();		
-	}
-	
+	}	
 }
