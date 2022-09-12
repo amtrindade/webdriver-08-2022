@@ -1,6 +1,6 @@
 package com.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CalculadoraTest {
 	private WebDriver driver;
@@ -44,7 +46,10 @@ public class CalculadoraTest {
 		tfTwo.sendKeys("5");
 		btnSum.click();
 
-		Thread.sleep(3000);
+		//Espera por um texto no textfield estar presente
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions
+				.textToBePresentInElementValue(By.id("total"), "9"));
 
 		// valida o resultado
 		assertEquals("9", tfTotal.getAttribute("value"));

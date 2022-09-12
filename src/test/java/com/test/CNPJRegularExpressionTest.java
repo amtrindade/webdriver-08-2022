@@ -12,6 +12,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CNPJRegularExpressionTest {
 	public WebDriver driver;
@@ -37,7 +40,9 @@ public class CNPJRegularExpressionTest {
 		
 		WebElement divCnpj = driver.findElement(By.id("texto_cnpj"));
 		
-		Thread.sleep(15000);
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions
+				.invisibilityOfElementWithText(By.id("texto_cnpj"), "Gerando..."));
 		
 		String cnpjGerado = divCnpj.getText();
 		System.out.println(cnpjGerado);
