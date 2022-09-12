@@ -18,8 +18,8 @@ public class RegularExpressionTest {
 		System.setProperty("webdriver.chrome.driver",
 				"/home/antonio/dev/drivers/chromedriver"); 		
 		driver = new ChromeDriver();		
+		
 		driver.get("https://www.geradordecpf.org/");		
-
 	}
 	
 	@After
@@ -37,8 +37,7 @@ public class RegularExpressionTest {
 		
 		WebElement tfCpf = driver.findElement(By.id("numero"));
 		
-		String cpfGerado = tfCpf.getAttribute("value");
-		Thread.sleep(3000);
+		String cpfGerado = tfCpf.getAttribute("value");		
 		
 		System.out.println(cpfGerado);
 		
