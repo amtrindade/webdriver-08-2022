@@ -1,45 +1,38 @@
 package com.test;
 
+import static com.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CalculadoraTest {
-	private WebDriver driver;
+import com.core.BaseTest;
+
+public class CalculadoraTest extends BaseTest{
+	
 	private WebElement tfOne;
 	private WebElement tfTwo;
 	private WebElement tfTotal;
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/home/antonio/dev/drivers/chromedriver");
-		// C:\\driver\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/desafiosoma.html");
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao/desafiosoma.html");
 
-		tfOne = driver.findElement(By.id("number1"));
-		tfTwo = driver.findElement(By.id("number2"));
-		tfTotal = driver.findElement(By.id("total"));
+		tfOne = getDriver().findElement(By.id("number1"));
+		tfTwo = getDriver().findElement(By.id("number2"));
+		tfTotal = getDriver().findElement(By.id("total"));
 
 	}
-
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
+	
 
 	@Test
 	public void testSoma() throws InterruptedException {
 		// mapeia os componentes
-		WebElement btnSum = driver.findElement(By.id("somar"));
+		WebElement btnSum = getDriver().findElement(By.id("somar"));
 
 		// interage com os valores
 		tfOne.sendKeys("4");
@@ -47,7 +40,7 @@ public class CalculadoraTest {
 		btnSum.click();
 
 		//Espera por um texto no textfield estar presente
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
 		wait.until(ExpectedConditions
 				.textToBePresentInElementValue(By.id("total"), "9"));
 
@@ -58,7 +51,7 @@ public class CalculadoraTest {
 	@Test
 	public void testSubtracao() {
 		// mapeia os componentes
-		WebElement btnMinus = driver.findElement(By.id("subtrair"));
+		WebElement btnMinus = getDriver().findElement(By.id("subtrair"));
 
 		// interage com os valores
 		tfOne.sendKeys("10");
@@ -71,7 +64,7 @@ public class CalculadoraTest {
 
 	@Test
 	public void testMultiplica() {
-		WebElement btnMultiplicacao = driver.findElement(By.id("multiplicar"));
+		WebElement btnMultiplicacao = getDriver().findElement(By.id("multiplicar"));
 
 		// interage com os valores
 		tfOne.sendKeys("10");

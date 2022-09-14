@@ -1,55 +1,44 @@
 package com.test;
 
-import static org.junit.Assert.*;
+import static com.core.DriverFactory.getDriver;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class NavigationTabsTest {
-	public WebDriver driver;
+import com.core.BaseTest;
+
+public class NavigationTabsTest extends BaseTest {	
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver",
-				"/home/antonio/dev/drivers/chromedriver"); 
-		//C:\\driver\\chromedriver.exe");
-		driver = new ChromeDriver();		
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/index.html");		
-
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao/index.html");		
 	}
 	
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();	
-	}
-
 	@Test
 	public void testNavigationTabs() {
 		//valida o título da página
-		assertEquals("Treino Automação de Testes", driver.getTitle());
+		assertEquals("Treino Automação de Testes", getDriver().getTitle());
 		
 		//mapeia o elemento
-		WebElement linkGcpf = driver.findElement(By.linkText("Gerador de CPF"));
+		WebElement linkGcpf = getDriver().findElement(By.linkText("Gerador de CPF"));
 		linkGcpf.click();
 		
 		//cria um arrayList com as tabs abertas
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
 		
-		//navega o foco do driver para a tab que se deseja interagir
-		driver.switchTo().window(tabs.get(1));
+		//navega o foco do getDriver() para a tab que se deseja interagir
+		getDriver().switchTo().window(tabs.get(1));
 		
 		//valida o título da nova página numa nova tab
-		assertEquals("Gerador de CPF", driver.getTitle());
+		assertEquals("Gerador de CPF", getDriver().getTitle());
 		
-		driver.switchTo().window(tabs.get(0));
-		assertEquals("Treino Automação de Testes", driver.getTitle());
+		getDriver().switchTo().window(tabs.get(0));
+		assertEquals("Treino Automação de Testes", getDriver().getTitle());
 		
 	}
 

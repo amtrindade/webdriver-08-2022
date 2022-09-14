@@ -1,60 +1,51 @@
 package com.test;
 
+import static com.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class CacheBrowserTest {
-	public WebDriver driver;
+import com.core.BaseTest;
+
+public class CacheBrowserTest extends BaseTest{
+	
 
 	@Before
-	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver",
-				"/home/antonio/dev/drivers/chromedriver"); 		
-		driver = new ChromeDriver();		
-		driver.get("http://antoniotrindade.com.br/treinoautomacao");		
-
-	}
-	
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();	
-	}
-	
+	public void setUp() throws Exception {		
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao");		
+	}	
+		
 	@Test
 	public void testNavigationCache() {
 		
-		assertEquals("Treino Automação de Testes", driver.getTitle());
+		assertEquals("Treino Automação de Testes", getDriver().getTitle());
 		
-		WebElement menuCalculadora = driver.findElement(By.linkText("Calculadora"));
+		WebElement menuCalculadora = getDriver().findElement(By.linkText("Calculadora"));
 		menuCalculadora.click();	
-		assertEquals("Desafio Automação Cálculos", driver.getTitle());
+		assertEquals("Desafio Automação Cálculos", getDriver().getTitle());
 		
-		WebElement menuTable = driver.findElement(By.linkText("Localizar Table"));
+		WebElement menuTable = getDriver().findElement(By.linkText("Localizar Table"));
 		menuTable.click();		
-		assertEquals("Trabalhando com tables", driver.getTitle());
+		assertEquals("Trabalhando com tables", getDriver().getTitle());
 		
 		//validar que estou na calculadora
-		driver.navigate().back();
-		assertEquals("Desafio Automação Cálculos", driver.getTitle());
+		getDriver().navigate().back();
+		assertEquals("Desafio Automação Cálculos", getDriver().getTitle());
 		
 		//validar que estou na home
-		driver.navigate().back();		
-		assertEquals("Treino Automação de Testes", driver.getTitle());
+		getDriver().navigate().back();		
+		assertEquals("Treino Automação de Testes", getDriver().getTitle());
 		
 		//validar qu estou na calculadora
-		driver.navigate().forward();
-		assertEquals("Desafio Automação Cálculos", driver.getTitle());
+		getDriver().navigate().forward();
+		assertEquals("Desafio Automação Cálculos", getDriver().getTitle());
 		
 		//validar que estou na tables
-		driver.navigate().forward();
-		assertEquals("Trabalhando com tables", driver.getTitle());
+		getDriver().navigate().forward();
+		assertEquals("Trabalhando com tables", getDriver().getTitle());
 	}
 
 	
