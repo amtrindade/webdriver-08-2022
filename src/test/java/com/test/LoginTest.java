@@ -5,15 +5,18 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.core.BaseTest;
+import com.page.BooksPage;
 import com.page.LoginPage;
 
 
 public class LoginTest extends BaseTest{
 	
+	private LoginPage loginPage;
+	private BooksPage booksPage;
+	
 	@Test
-	public void testPasswordInvalid() {
-		
-		LoginPage loginPage = new LoginPage();
+	public void testPasswordInvalid() {		
+		loginPage = new LoginPage();
 		loginPage.open();
 		loginPage.enterUsername("test");
 		loginPage.enterPassword("x1234dfsfdsf");
@@ -21,6 +24,18 @@ public class LoginTest extends BaseTest{
 		
 		assertEquals("Invalid username or password", 
 				loginPage.getMessageError());				
+	}
+	
+	@Test
+	public void testLoginValid() {
+		loginPage = new LoginPage();
+		loginPage.open();
+		loginPage.enterUsername("test");
+		loginPage.enterPassword("secret");
+		
+		booksPage = loginPage.submitValid();
+		
+		assertEquals("All available books", booksPage.getTextTitle());		
 	}
 
 }

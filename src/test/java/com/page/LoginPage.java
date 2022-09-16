@@ -34,6 +34,12 @@ public class LoginPage {
 		WebElement messageError = getDriver().findElement(By.id("errorMessage"));
 		return messageError.getText();
 	}
+	
+	public BooksPage submitValid() {
+		WebElement btnLogar = getDriver().findElement(By.xpath("//input[@value='Login']"));
+		btnLogar.click();
+		return new BooksPage();
+	}
 
 
 }
