@@ -19,7 +19,7 @@ public abstract class BaseTest {
 	
 	//Executa este método após cada teste
 	@After
-	public void tearDown() throws IOException {
+	public void tearDown() throws IOException {		
 		File scrnShot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(scrnShot, new File("target"+ File.separator + testName.getMethodName()+ ".jpg"));		
 		
