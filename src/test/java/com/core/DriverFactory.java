@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DriverFactory {
 
 	public static WebDriver driver = null;
-	static String typeDriver = "Chrome"; // Chrome
+	static String typeDriver = "Chromeheadless"; // Chrome
 
 	// Cria o driver e devolve para o teste
 	public static WebDriver getDriver() {

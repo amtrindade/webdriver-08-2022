@@ -4,6 +4,7 @@ import static com.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,7 @@ public class CNPJRegularExpressionTest extends BaseTest{
 		getDriver().get("https://www.4devs.com.br/gerador_de_cnpj");		
 	}
 		
-	
+	@Ignore
 	@Test
 	public void testValidateCNPJWithMak() throws InterruptedException {
 		WebElement btnGerar = getDriver().findElement(By.id("bt_gerar_cnpj"));
@@ -38,6 +39,7 @@ public class CNPJRegularExpressionTest extends BaseTest{
 		assertTrue(cnpjGerado.matches("^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$"));
 	}
 	
+	@Ignore
 	@Test
 	public void testValidateCNPJWhithoutMask() throws InterruptedException {
 		WebElement checkNo = getDriver().findElement(By.id("pontuacao_nao"));
